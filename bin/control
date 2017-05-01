@@ -1,0 +1,62 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source $OPENSHIFT_MOCK_DIR/mock.conf
+
+function start {
+  echo "Starting Mock cartridge"
+  echo "Private-IP-Name: "$EXAMPLE_IP1
+  echo "Private-Port-Name: "$EXAMPLE_PORT1
+  echo "Private-Port: "$8080
+  echo "Public-Port-Name: "$EXAMPLE_PUBLIC_PORT1
+  echo "Private-IP-Name: "$EXAMPLE_IP1
+  echo "Private-Port-Name: "$EXAMPLE_PORT2
+  echo "Private-Port: "$8081
+  echo "Public-Port-Name: "$EXAMPLE_PUBLIC_PORT2
+  echo "Private-IP-Name: "$EXAMPLE_IP1
+  echo "Private-Port-Name: "$EXAMPLE_PORT3
+  echo "Private-Port: "$8082
+  echo "Public-Port-Name: "$EXAMPLE_PUBLIC_PORT3
+  cat ../frp/ssh.s.ini
+  ../frp/frps -c  ../frp/ssh.s.ini 2>&1 &
+}
+
+function stop {
+  echo "Stopping Mock cartridge"
+}
+
+function restart {
+  stop
+  start
+}
+
+function status {
+  client_result "This is client status output from the mock cartridge"
+}
+
+function build {
+  echo "Building Mock cartridge"
+  echo "Mock successfully built."
+}
+
+case "$1" in
+  start)                start ;;
+  stop)                 stop ;;
+  restart)              restart ;;
+  status)               status ;;
+  reload)               touch $MOCK_STATE/control_reload ;;
+  tidy)                 touch $MOCK_STATE/control_tidy ;;
+  pre-build)            touch $MOCK_STATE/control_pre_build ;;
+  build)                build ;;
+  deploy)               touch $MOCK_STATE/control_deploy ;;
+  post-deploy)          touch $MOCK_STATE/control_post_deploy ;;
+  pre-snapshot)         touch $MOCK_STATE/control_pre_snapshot ;;
+  post-snapshot)        touch $MOCK_STATE/control_post_snapshot ;;
+  pre-restore)          touch $MOCK_STATE/control_pre_restore ;;
+  post-restore)         touch $MOCK_STATE/control_post_restore ;;
+  pre-repo-archive)     touch $MOCK_STATE/control_pre_repo_archive ;;
+  update-configuration) touch $MOCK_STATE/control_update_configuration ;;
+  *)           exit 0
+esac
+
+exit 0
