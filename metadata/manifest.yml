@@ -4,10 +4,11 @@ Cartridge-Short-Name: FRP
 Display-Name: FRP Cartridge 0.1
 Description: A FRP cartridge for development use only.
 Version: '0.1'
+Source-Url: git@github.com:debuggings/os-frp.git
 License: ASL 2.0
 Vendor: FRP
 Cartridge-Version: 0.0.1
-Cartridge-Vendor: FRP
+Cartridge-Vendor: frp frp
 Categories:
 - service
 - web_framework
