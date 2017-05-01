@@ -8,7 +8,7 @@ Source-Url: git@github.com:debuggings/os-frp.git
 License: ASL 2.0
 Vendor: FRP
 Cartridge-Version: 0.0.1
-Cartridge-Vendor: Aedhaz
+Cartridge-Vendor: edhaz
 Categories:
 - service
 - web_framework
